@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended Drinks</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e30 25%, #2e2e42 25%, #2e2e42 50%, #1e1e30 50%, #1e1e30 75%, #2e2e42 75%);
+            background-size: 40px 40px;
+            margin: 0;
+            padding: 0;
+            color: #f5f5f5;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, #ff6f3c, #ff4e00);
+            color: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        /*header img {*/
+        /*    height: 60px;*/
+        /*}*/
+        header button {
+            background-color: #262640;;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        header button:hover {
+            background-color: #171b2c;
+        }
+        h1, h3 {
+            text-align: center;
+            margin: 20px;
+            color: #ff6f3c;
+        }
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .card {
+            background-color: #262640;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+        .star-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .star-button img {
+            height: 24px;
+            width: 24px;
+            transition: transform 0.3s;
+        }
+        .star-button:hover img {
+            transform: scale(1.2);
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #ff6f3c;
+            color: white;
+            margin-top: auto;
+            border-top: 5px solid #ff4e00;
+        }
+        a {
+            text-decoration: none;
+            color: #ff6f3c;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #ff4e00;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="/images/IbolyAppLogo.png" alt="ibolyApp Logo" />
+
+    <a  th:href="@{/recommend/recommendForm}"><button type="submit">Vissza</button></a>
+</header>
+<h1>Ajánlott italok</h1>
+<div class="card-container">
+    <div class="card">
+        <h3>Első variáció</h3>
+        <form th:if="${isLoggedIn}" class="favourite-form" th:action="@{/favourite/add}" method="post">
+            <input type="hidden" th:value="${package1.id}" name="packageId" />
+            <button type="button" class="star-button">
+                <img src="/images/star.svg" alt="Favorite" />
+            </button>
+        </form>
+        <ul>
+            <li th:each="drink : ${recommendedDrinks1}">
+                <span th:text="${drink.name}"></span> -
+                <span th:text="${drink.price % 1 == 0 ? drink.price.intValue() : drink.price}">Price</span> HUF -
+                <span th:text="${drink.alcoholContent % 1 == 0 ? drink.alcoholContent.intValue() : drink.alcoholContent}">Alcohol Content</span>%
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>Második variáció</h3>
+        <form th:if="${isLoggedIn}" class="favourite-form" th:action="@{/favourite/add}" method="post">
+            <input type="hidden" th:value="${package2.id}" name="packageId" />
+            <button type="button" class="star-button">
+                <img src="/images/star.svg" alt="Favorite" />
+            </button>
+        </form>
+        <ul>
+            <li th:each="drink : ${recommendedDrinks2}">
+                <span th:text="${drink.name}"></span> -
+                <span th:text="${drink.price % 1 == 0 ? drink.price.intValue() : drink.price}">Price</span> HUF -
+                <span th:text="${drink.alcoholContent % 1 == 0 ? drink.alcoholContent.intValue() : drink.alcoholContent}">Alcohol Content</span>%
+            </li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>Harmadik variáció</h3>
+        <form th:if="${isLoggedIn}" class="favourite-form" th:action="@{/favourite/add}" method="post">
+            <input type="hidden" th:value="${package3.id}" name="packageId" />
+            <button type="button" class="star-button">
+                <img src="/images/star.svg" alt="Favorite" />
+            </button>
+        </form>
+        <ul>
+            <li th:each="drink : ${recommendedDrinks3}">
+                <span th:text="${drink.name}"></span> -
+                <span th:text="${drink.price % 1 == 0 ? drink.price.intValue() : drink.price}">Price</span> HUF -
+                <span th:text="${drink.alcoholContent % 1 == 0 ? drink.alcoholContent.intValue() : drink.alcoholContent}">Alcohol Content</span>%
+            </li>
+        </ul>
+    </div>
+</div>
+
+<p style="font-weight: bold">Az ital lista megtekintéséhez <a class="egybe" th:href="@{/list/drinklist}">kattints ide!</a></p>
+<p style="font-weight: bold" th:if="${!isLoggedIn}">
+<!--<p>Ha még nem regisztráltál <a href="/register">kattints ide!</a></p>-->
+    A kedvenc csomagjaid elmentéséhez <a th:href="@{/login}"> jelentkezz be!</a>
+
+<p style="font-weight: bold" th:if="${isLoggedIn}">
+A kedvenceid megtekintéséhez <a class="egybe" th:href="@{/user/drink-packages}">kattints ide!</a>
+
+</p>
+
+<footer>
+    <p>&copy; 2024 IbolyaRémei - Minden jog fenntartva.</p>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const starButtons = document.querySelectorAll(".star-button");
+
+        starButtons.forEach(button => {
+            button.addEventListener("click", function(event) {
+                event.preventDefault();
+                const form = this.closest(".favourite-form");
+                const packageId = form.querySelector("input[name='packageId']").value;
+                const isActive = this.classList.contains("active");
+                const endpoint = isActive ? "/favourite/remove" : "/favourite/add";
+
+                fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `packageId=${packageId}`
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            this.classList.toggle("active");
+                            const img = this.querySelector("img");
+                            img.src = this.classList.contains("active") ? "/images/star-filled.svg" : "/images/star.svg";
+                            alert(isActive ? "Eltávolítva a kedvencekből!" : "Hozzáadva a kedvencekhez!");
+                        } else {
+                            alert("Something went wrong!");
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script>
+</body>
+</html>
